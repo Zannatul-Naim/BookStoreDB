@@ -1,13 +1,15 @@
 <?php
+require_once 'Connection.php';
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "bookstore";
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $dbname = "bookstore";
 
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn = getConnection();
+        $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
         $sql = "DELETE FROM book WHERE isbn = :isbn";
 

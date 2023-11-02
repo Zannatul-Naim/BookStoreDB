@@ -24,14 +24,16 @@
 </html>
 
 <?php
+require_once 'Connection.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "bookstore";
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $dbname = "bookstore";
 
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn = getConnection();
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "UPDATE book SET title=:title, author=:author, stock=:stock, price=:price WHERE isbn=:isbn";

@@ -31,7 +31,7 @@ $dbname = "bookstore";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
     $stmt = $conn->prepare("SELECT * FROM book");
     $stmt->execute();
@@ -42,9 +42,9 @@ try {
     echo "<tr><th>Title</th><th>Author</th><th>ISBN</th><th>Stock</th><th>Price</th><th colspan=2>Action</th></tr>";
     foreach($stmt->fetchAll() as $k=>$v) {
         echo "<tr>";
-        echo "<td>".$v['isbn']."</td>";
         echo "<td>".$v['title']."</td>";
         echo "<td>".$v['author']."</td>";
+        echo "<td>".$v['isbn']."</td>";
         echo "<td>".$v['stock']."</td>";
         echo "<td>".$v['price']."</td>";
         echo "<td><a href='update.php?isbn=" . $v['isbn'] . "'><button>Update</button></td><td> <a href='delete.php?isbn=" . $v['isbn'] . "'><button>Delete</button></td>";
